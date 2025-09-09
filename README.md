@@ -2,7 +2,17 @@
 
 A fully functional Super Mario Bros game built with TypeScript, HTML5 Canvas, and modern web technologies. This game runs entirely in the browser and includes classic Mario mechanics like jumping, enemy stomping, coin collection, and platform physics.
 
+## 📸 Screenshots
 
+### Docker Build
+![Docker Build](./images/docker-build.png)
+
+### Mario Game in Browser
+![Mario Game](./images/mario-game-1.png)
+![Mario Game](./images/mario-game-2.png)
+
+### My Azure Virtual Machine
+![Azure VM](./images/azure-vm.png)
 
 ## 🙌 Credits
 
@@ -61,19 +71,6 @@ http://<vm-ip>:8080
 
 My deployed azure vm
 http://20.0.83.247:8080/
-
-
-### 1. Docker Build
-![Docker Build](./images/docker-build.png)
-
-### 2. Mario Game in Browser
-![Mario Game](./images/mario-game-1.png)
-![Mario Game](./images/mario-game-2.png)
-
-### 3. My Virtual Machine
-![Azure VM](./images/azure-vm.png)
-
-
 
 ## 💡 Key Learnings
 
