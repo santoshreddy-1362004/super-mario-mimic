@@ -63,15 +63,15 @@ My deployed azure vm
 http://20.0.83.247:8080/
 
 ### 1. Docker Build
-![Docker Build](./images/images/Screenshot (89).png)
+![Docker Build](./images/Screenshot-89.png)
 
 ### 2. Mario Game in Browser
-![Mario Game](./images/images/Screenshot (92).png)
+![Mario Game](./images/Screenshot-92.png)
+![Mario Game](./images/Screenshot-93.png)
 
-![Mario Game](./images/images/Screenshot (93).png)
+### 3. My Virtual Machine
+![VM](./images/Screenshot-91.png)
 
-### 3. My virtual machine
-![Mario Game](./images/images/Screenshot (91).png)
 
 
 ## 💡 Key Learnings
