@@ -2,190 +2,91 @@
 
 A fully functional Super Mario Bros game built with TypeScript, HTML5 Canvas, and modern web technologies. This game runs entirely in the browser and includes classic Mario mechanics like jumping, enemy stomping, coin collection, and platform physics.
 
-## 🎮 Game Features
 
-- **Authentic Mario Movement**: Physics-based player movement with running, jumping, and momentum
-- **Enemy AI**: Goombas that patrol platforms and can be defeated by jumping
-- **Collectibles**: Coins with animated collection effects
-- **Level Design**: Multi-platform levels with varying difficulty
-- **Score System**: Points for collecting coins and defeating enemies
-- **Lives System**: Traditional 3-lives gameplay with game over screen
-- **Sound Effects**: Web Audio API generated retro sound effects
-- **Responsive Design**: Scales to different screen sizes
 
-## 🏗️ Project Structure
+## 🙌 Credits
 
-```
-├── src/
-│   ├── game/
-│   │   ├── entities/
-│   │   │   ├── Player.ts          # Player character with physics and controls
-│   │   │   ├── Enemy.ts           # Enemy AI and behavior
-│   │   │   ├── Coin.ts            # Collectible coins with animations
-│   │   │   └── Platform.ts        # Platform/ground collision objects
-│   │   ├── Game.ts                # Main game controller and state management
-│   │   ├── GameRenderer.ts        # Rendering engine for all game objects
-│   │   ├── InputHandler.ts        # Keyboard input management
-│   │   ├── SoundManager.ts        # Audio effects using Web Audio API
-│   │   └── CollisionDetector.ts   # Physics collision detection system
-│   ├── styles/
-│   │   └── game.css               # Game UI and canvas styling
-│   └── main.ts                    # Application entry point and game loop
-├── index.html                     # Main HTML file
-├── Dockerfile                     # Container configuration
-├── package.json                   # Dependencies and scripts
-└── README.md                      # This file
-```
+Original game code: https://github.com/iam-veeramalla/super-mario-mimic
 
-## 🎯 Game Architecture
+DevOps containerization and cloud deployment: Santosh reddy
 
-### Core Components
+# 🎮 Super Mario Mimic – Dockerized & Deployed on Azure
 
-1. **Game.ts** - Central game controller that:
-   - Manages game state (playing, game over)
-   - Coordinates all game entities
-   - Handles collision detection
-   - Updates score, lives, and level progression
+This project is an open-source **Super Mario mimic game** built with **Node.js**.  
+My **DevOps contribution** was to debug, containerize, and successfully deploy the application on an **Azure Virtual Machine** using Docker.  
 
-2. **Player.ts** - Mario character implementation:
-   - Physics-based movement with gravity and friction
-   - Jump mechanics with proper air control
-   - Platform collision detection
-   - Animation state management
+---
 
-3. **Enemy.ts** - Goomba enemy behavior:
-   - Autonomous movement with direction changes
-   - Platform-aware AI that doesn't fall off edges
-   - Collision detection with player and platforms
+## 🔧 My DevOps Contribution
 
-4. **GameRenderer.ts** - Rendering system:
-   - Pixel-perfect sprite drawing
-   - Background and environment rendering
-   - Animation frame management
-   - Responsive canvas scaling
+- Created an **optimized multi-stage Dockerfile** (see [`devops/Dockerfile`](./devops/Dockerfile)).  
+- Fixed build issues (`node:18-alphine` → `node:18-alpine`).  
+- Built and ran the container locally with Docker.  
+- Deployed on an **Azure Ubuntu VM**.  
+- Configured **Azure NSG rules** to expose port 8080.  
+- Resolved **Docker daemon permission issues** (`/var/run/docker.sock`).  
+I started by creating an Azure VM and SSH’d into it using my private key. Once inside, I installed Docker and configured the environment. After cloning the repository, I noticed it didn’t have a Docker setup suitable for optimization, so I created my own Dockerfile inside a devops/ folder.
 
-5. **InputHandler.ts** - Input management:
-   - Real-time keyboard state tracking
-   - Smooth movement input processing
-   - Focus and blur event handling
+I used a multi-stage Docker build to first install dependencies and build the project, and then created a lightweight production image using node:18-alpine. This approach helped me reduce the image size compared to a single-stage build, which is an important DevOps practice for efficiency and faster deployments.
 
-### Game Mechanics
+Once the image was built, I ran the container and exposed it on port 8080. Finally, I verified that the Mario Game was accessible through the browser, served via http-server.
 
-- **Movement**: Arrow keys for left/right movement with momentum
-- **Jumping**: Spacebar for jumping with variable height based on hold duration
-- **Combat**: Jump on enemies to defeat them and gain points
-- **Collection**: Touch coins to collect them for score
-- **Lives**: Start with 3 lives, lose one when hit by enemy or falling
-- **Progression**: Clear all coins and enemies to advance to next level
+---
 
-## 🚀 Getting Started
+## 🛠️ Tech Stack
 
-### Prerequisites
-- Node.js 18 or higher
-- npm or yarn package manager
+- **Application**: Node.js, JavaScript, HTML, CSS  
+- **DevOps Tools**: Docker, Azure VM (Ubuntu), Linux, Networking  
 
-### Local Development
+---
 
-1. **Clone and install dependencies:**
+## 🚀 How to Run
+
+### 1️⃣ Clone the repo
 ```bash
-git clone <repository-url>
-cd super-mario-game
-npm install
-```
+git clone https://github.com/<your-username>/super-mario-mimic.git
+cd super-mario-mimic
 
-2. **Start the development server:**
-```bash
-npm run dev
-```
+2️⃣ Build the image
+docker build -t mario-game -f devops/Dockerfile .
 
-3. **Open your browser and navigate to the local development URL**
+3️⃣ Run the container
+docker run -p 8080:8080 mario-game
 
-### Building for Production
+4️⃣ Access in browser
+http://localhost:8080
 
-```bash
-npm run build
-npm run preview
-```
+On Azure VM (replace <vm-ip> with your public IP):
+http://<vm-ip>:8080
 
-## 🐳 Docker Containerization
+My deployed azure vm
+http://20.0.83.247:8080/
 
-This application can be containerized using Docker for easy deployment and distribution.
+### 1. Docker Build
+![Docker Build](./images/images/Screenshot (89).png)
 
-### Building the Docker Image
+### 2. Mario Game in Browser
+![Mario Game](./images/images/Screenshot (92).png)
 
-1. **Build the image:**
-```bash
-docker build -t super-mario-game .
-```
+![Mario Game](./images/images/Screenshot (93).png)
 
-2. **Run the container:**
-```bash
-docker run -p 8080:8080 super-mario-game
-```
+### 3. My virtual machine
+![Mario Game](./images/images/Screenshot (91).png)
 
-3. **Access the game:**
-Open your browser and navigate to `http://localhost:8080`
 
-### Docker Image Details
+## 💡 Key Learnings
 
-The Dockerfile:
-- Uses Node.js 18 Alpine for a lightweight base image
-- Installs dependencies and builds the application
-- Serves the built files using http-server
-- Exposes port 8080 for web access
-- Includes proper .dockerignore for optimized builds
+Worked with multi-stage Docker builds for smaller image sizes.
 
-### Production Deployment
+Understood cloud networking: firewall + NSG rules in Azure.
 
-For production deployment, you can push the Docker image to a container registry:
+Solved real-world issues like missing images, build typos, and permission errors.
 
-```bash
-# Tag for registry
-docker tag super-mario-game your-registry/super-mario-game:latest
+Gained hands-on experience in end-to-end DevOps workflow:
+clone → containerize → deploy → expose → access via browser.
 
-# Push to registry
-docker push your-registry/super-mario-game:latest
+👨‍💻 Author: Santosh reddy
+🔗 LinkedIn: https://www.linkedin.com/in/santosh-reddy-95a342283
 
-# Deploy to your container platform
-docker run -d -p 80:8080 your-registry/super-mario-game:latest
-```
 
-## 🎮 Game Controls
 
-- **Arrow Left/Right**: Move Mario left or right
-- **Spacebar**: Jump (hold for higher jumps)
-- **R**: Restart game (when game over)
-
-## 🔧 Technical Implementation
-
-### Performance Optimizations
-- Efficient collision detection using AABB (Axis-Aligned Bounding Box)
-- Optimized rendering with minimal canvas operations
-- Frame-rate independent game logic using delta time
-- Memory-efficient entity management
-
-### Browser Compatibility
-- Modern ES6+ features with TypeScript compilation
-- Web Audio API for sound (gracefully degrades if unsupported)
-- Canvas 2D API for graphics (widely supported)
-- Responsive design for various screen sizes
-
-### Code Quality
-- TypeScript for type safety and better development experience
-- Modular architecture with clear separation of concerns
-- ESLint configuration for code quality
-- Comprehensive file organization following best practices
-
-## 🎨 Customization
-
-The game is designed to be easily customizable:
-
-- **Add new enemies**: Extend the Enemy class with new types
-- **Create new levels**: Modify the level initialization in Game.ts
-- **Change graphics**: Update the rendering methods in GameRenderer.ts
-- **Add power-ups**: Create new collectible entities
-- **Modify physics**: Adjust constants in Player.ts and Enemy.ts
-
-## 📝 License
-
-This project is created for educational and demonstration purposes. Super Mario Bros is a trademark of Nintendo.
